@@ -15,7 +15,7 @@ let {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    <home-manager/nixos>
+    # <home-manager/nixos>
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -86,15 +86,15 @@ let {
   users.defaultUserShell = pkgs.zsh;
 
   # USER ACCOUNTS
-  users.users.USER_NAME = {
+  users.users."${USER_NAME}" = {
     isNormalUser = true;
-    home = "/home/USER_NAME";
+    home = "/home/${USER_NAME}";
     extraGroups = [
       "wheel" # Enable ‘sudo’ for the user.
       "networkmanager"
     ];
     openssh.authorizedKeys.keyFiles = [
-      "/home/USER_NAME/.ssh/authorized_keys"
+      "/home/${USER_NAME}/.ssh/authorized_keys"
     ];
   };
 
@@ -111,6 +111,7 @@ let {
     pkgs.yt-dlp
     protonvpn-cli
     zellij
+    pkgs.sanoid
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
